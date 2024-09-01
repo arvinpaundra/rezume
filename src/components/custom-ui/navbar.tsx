@@ -1,22 +1,14 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import React from 'react';
-import { JetBrains_Mono } from 'next/font/google';
-
-const gabarito = JetBrains_Mono({
-  weight: ['400', '500', '600', '800'],
-  subsets: ['latin'],
-});
 
 const NavBar = () => {
   return (
-    <header
-      className={`mt-2 py-4 text-cultured flex justify-around items-center border border-raisin-black rounded bg-erie-black ${gabarito.className}`}
-    >
-      <p className="text-xl font-semibold underline decoration-solid decoration-2 underline-offset-4 decoration-imperial-red cursor-pointer">
+    <header className="mt-2 py-4 px-4 text-cultured flex md:justify-around justify-between items-center border border-raisin-black rounded bg-erie-black">
+      <p className="sm:text-xl font-semibold underline decoration-solid decoration-2 underline-offset-4 decoration-imperial-red cursor-pointer">
         arvinpaundra.
       </p>
-      <ul className="flex justify-between items-center gap-12">
+      <ul className="md:flex md:justify-between md:items-center md:gap-12 hidden">
         <li>
           <Link className="relative group font-light" href="#self">
             <span>self</span>
@@ -39,9 +31,18 @@ const NavBar = () => {
           </Link>
         </li>
       </ul>
-      <Button className="bg-imperial-red hover:bg-imperial-red/80 hover:transition">
-        rezume-dl
-      </Button>
+      <Link
+        href="https://drive.google.com/file/d/1LaTzHOd3CIMeCT00EqbIRu3Yuoydi13A/view?usp=sharing"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="md:block hidden"
+      >
+        <Button className="bg-imperial-red hover:bg-imperial-red/80 hover:transition">
+          rezume-dl
+        </Button>
+      </Link>
+
+      <Button className="md:hidden">Icon</Button>
     </header>
   );
 };

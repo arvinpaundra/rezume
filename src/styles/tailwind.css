@@ -4,6 +4,6 @@
 
 @layer base {
   body {
-    @apply bg-black px-64 text-cultured;
+    @apply bg-black xl:px-64 md:px-12 px-4 text-cultured;
   }
 }

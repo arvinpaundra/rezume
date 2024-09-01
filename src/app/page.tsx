@@ -1,10 +1,17 @@
 import NavBar from '@/components/custom-ui/navbar';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { FaDocker, FaGithub, FaGolang, FaXTwitter } from 'react-icons/fa6';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import {
+  FaDigitalOcean,
+  FaDocker,
+  FaGithub,
+  FaGolang,
+  FaXTwitter,
+} from 'react-icons/fa6';
 import React from 'react';
 import { IconType } from 'react-icons';
 import {
   SiLinkedin,
+  SiMysql,
   SiPhp,
   SiRabbitmq,
   SiRedis,
@@ -17,51 +24,195 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import Link from 'next/link';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from '@/components/ui/card';
+import Image from 'next/image';
+import { GrNode } from 'react-icons/gr';
+import { FaReact } from 'react-icons/fa';
+import { Badge } from '@/components/ui/badge';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+
+interface IProject {
+  name: string;
+  thumbnail: string;
+  repo: string;
+  disabled: boolean;
+  description: string | null;
+  link: string;
+  stacks?: IStack[];
+}
 
 interface IStack {
   Icon: IconType;
   Label: string;
 }
 
-const stacks: IStack[][] = [
-  [
-    {
-      Icon: FaGolang,
-      Label: 'Golang',
-    },
-    {
-      Icon: SiPhp,
-      Label: 'PHP',
-    },
-    {
-      Icon: SiTypescript,
-      Label: 'Typescript',
-    },
-  ],
-  [
-    {
-      Icon: BiLogoPostgresql,
-      Label: 'PostgreSQL',
-    },
-    {
-      Icon: SiRedis,
-      Label: 'Redis',
-    },
-    {
-      Icon: SiRabbitmq,
-      Label: 'RabbitMQ',
-    },
-  ],
-  [
-    {
-      Icon: FaDocker,
-      Label: 'Docker',
-    },
-    {
-      Icon: ImGit,
-      Label: 'Git',
-    },
-  ],
+const stacks: IStack[] = [
+  {
+    Icon: FaGolang,
+    Label: 'Go',
+  },
+  {
+    Icon: SiPhp,
+    Label: 'PHP',
+  },
+  {
+    Icon: SiTypescript,
+    Label: 'Typescript',
+  },
+  {
+    Icon: BiLogoPostgresql,
+    Label: 'PostgreSQL',
+  },
+  {
+    Icon: SiRedis,
+    Label: 'Redis',
+  },
+  {
+    Icon: SiRabbitmq,
+    Label: 'RabbitMQ',
+  },
+  {
+    Icon: FaDocker,
+    Label: 'Docker',
+  },
+  {
+    Icon: ImGit,
+    Label: 'Git',
+  },
+];
+
+const projects: IProject[] = [
+  {
+    name: 'Chatty',
+    description: 'Basic real-time chat application like discord. (WIP)',
+    disabled: true,
+    repo: 'https://github.com/arvinpaundra/chatty-api',
+    thumbnail: '/chatty.png',
+    link: '',
+    stacks: [
+      {
+        Icon: GrNode,
+        Label: 'Node',
+      },
+      {
+        Icon: SiTypescript,
+        Label: 'Typescript',
+      },
+      {
+        Icon: FaReact,
+        Label: 'React',
+      },
+    ],
+  },
+  {
+    name: 'Reksi',
+    description: 'Managing student`s scientific papers with cloud storage.',
+    disabled: true,
+    repo: 'https://github.com/arvinpaundra/repository-api',
+    thumbnail: '/reksi.png',
+    link: '',
+    stacks: [
+      {
+        Icon: FaReact,
+        Label: 'React',
+      },
+      {
+        Icon: FaGolang,
+        Label: 'Go',
+      },
+      {
+        Icon: SiMysql,
+        Label: 'MySQL',
+      },
+      {
+        Icon: FaDigitalOcean,
+        Label: 'DigitalOcean',
+      },
+    ],
+  },
+  {
+    name: 'Tabung Kebaikan',
+    description: 'Help fundraiser manage munfiq charity across subdistrict.',
+    disabled: true,
+    repo: 'https://github.com/arvinpaundra/tabung_kebaikan_api',
+    thumbnail: '/tabung-kebaikan.png',
+    link: '',
+    stacks: [
+      {
+        Icon: GrNode,
+        Label: 'Node',
+      },
+      {
+        Icon: SiMysql,
+        Label: 'MySQL',
+      },
+      {
+        Icon: FaReact,
+        Label: 'React',
+      },
+    ],
+  },
+  {
+    name: 'GoShare',
+    description:
+      'Platform for content youtube sharing to level-up your watch time.',
+    disabled: true,
+    repo: 'https://github.com/arvinpaundra/go-share-api',
+    thumbnail: '/go-share.png',
+    link: '',
+    stacks: [
+      {
+        Icon: GrNode,
+        Label: 'Node',
+      },
+      {
+        Icon: SiMysql,
+        Label: 'MySQL',
+      },
+      {
+        Icon: FaReact,
+        Label: 'React',
+      },
+    ],
+  },
+  {
+    name: 'Moweee',
+    description: 'Get to know what is your watchlist preferences.',
+    disabled: false,
+    repo: 'https://github.com/arvinpaundra/moweee',
+    thumbnail: '/moweee.png',
+    link: 'https://moweee.vercel.app/',
+    stacks: [
+      {
+        Icon: FaReact,
+        Label: 'React',
+      },
+    ],
+  },
+  {
+    name: 'ShoeAddict',
+    description: 'Inspired by Adidas web for shoe marketplace, sheshh...',
+    disabled: false,
+    repo: 'https://github.com/arvinpaundra/ShoeAddict',
+    thumbnail: '/shoeaddict.png',
+    link: 'https://shoeaddict.vercel.app',
+    stacks: [
+      {
+        Icon: FaReact,
+        Label: 'React',
+      },
+    ],
+  },
 ];
 
 export default function Home() {
@@ -69,11 +220,9 @@ export default function Home() {
     <main>
       <NavBar />
 
-      <section className="py-10 px-28 flex flex-col gap-8">
+      <section className="py-10 xl:px-28 md:px-16 sm:px-8 px-4 flex flex-col gap-8">
         <section className="flex justify-center items-center">
           <Alert className="bg-imperial-red/20 border border-imperial-red/80 text-white">
-            {/* <Terminal className="h-4 w-4" />
-            <AlertTitle>New Notification</AlertTitle> */}
             <AlertDescription className="text-center">
               Hi there, welcome to my web resume.
             </AlertDescription>
@@ -94,14 +243,14 @@ export default function Home() {
           >
             Self
           </h3>
-          <p className="text-sm">
+          <p className="text-sm text-manatee">
             A <span className="text-vivid-red">Software Engineer</span> with
-            having strong knowledge and expertise in Backend Development that
-            enthusiastic and eager to create robust and scalable systems. Have a
-            good understanding of Go, PHP, and Typescript programming languages,
-            as well as a strong understanding of creating an efficient and
-            secure API. Committed to developing capabilities in software
-            development to help the efficiency of an organization.
+            having knowledge and expertise in Backend Development that
+            enthusiastic and eager to create robust and scalable web
+            application. Have a good understanding of Go, PHP, and Typescript
+            programming languages, as well as a strong understanding of creating
+            an efficient and secure API. Committed to developing capabilities in
+            software development to help the efficiency of an organization.
           </p>
         </section>
 
@@ -110,18 +259,16 @@ export default function Home() {
             Stuff that i`ve used
           </h3>
           <ul>
-            <li className="flex justify-between items-start gap-20">
-              {stacks.map((stack: IStack[], index: number) => (
-                <ul key={index}>
-                  {stack.map((s: IStack) => (
-                    <li
-                      key={s.Label}
-                      className="flex justify-start items-center gap-2"
-                    >
-                      <s.Icon />
-                      <p>{s.Label}</p>
-                    </li>
-                  ))}
+            <li className="grid grid-rows-3 grid-flow-col gap-2">
+              {stacks.map((stack: IStack) => (
+                <ul key={stack.Label}>
+                  <li
+                    key={stack.Label}
+                    className="flex justify-start items-center gap-2"
+                  >
+                    <stack.Icon />
+                    <p>{stack.Label}</p>
+                  </li>
                 </ul>
               ))}
             </li>
@@ -137,19 +284,17 @@ export default function Home() {
           </h3>
 
           <Timeline>
-            <TimelineContent date="Komerce • August 2023 - Present">
-              <ul className="list-decimal">
+            <TimelineContent header="Komerce • August 2023 - Present">
+              <ul className="list-decimal text-manatee">
                 <li>
                   Developed and maintained kompack.id to manage partner
                   products, warehouses, and revenue streams.
                 </li>
                 <li>
-                  Optimized and fixed over 10+ bugs from kompack.id legacy.
-                </li>
-                <li>
                   Released latest version of kompack.id as a standalone service
                   written in Go and PostgreSQL for storage.
                 </li>
+                <li>Optimized and fixed bugs over komerce.id products.</li>
                 <li>
                   Developed an internal service with Go to efficiently generate
                   thousands of komship.id order records, using Mongo for data
@@ -163,8 +308,8 @@ export default function Home() {
               </ul>
             </TimelineContent>
 
-            <TimelineContent date="Golet Digital Solusi • August 2022 - August 2023">
-              <ul className="list-decimal">
+            <TimelineContent header="Golet Digital Solusi • August 2022 - August 2023">
+              <ul className="list-decimal text-manatee">
                 <li>
                   Rebuild an application named GOCAP 2.0 using Laravel and
                   Flutter. Integrated with Whatsapp and Firebase Cloud Messaging
@@ -177,8 +322,8 @@ export default function Home() {
               </ul>
             </TimelineContent>
 
-            <TimelineContent date="Magang dan Studi Independen (MSIB) • August 2022 - December 2022">
-              <ul className="list-decimal">
+            <TimelineContent header="Magang dan Studi Independen (MSIB) • August 2022 - December 2022">
+              <ul className="list-decimal text-manatee">
                 <li>
                   Developed an API for Bike Rental using Go, MySQL, and
                   integrated with payment gateway Midtrans. The API was deployed
@@ -206,6 +351,127 @@ export default function Home() {
           <h3 className="font-semibold text-lg underline decoration-solid decoration-2 underline-offset-4 decoration-imperial-red">
             My Projects
           </h3>
+
+          <p className="text-sm">
+            Hey, don`t forget to check out my other projects. 👻
+          </p>
+
+          <section className="grid grid-cols-2 gap-2">
+            {projects.map((project: IProject) => (
+              <Card
+                className="bg-erie-black border border-raisin-black"
+                key={project.name}
+              >
+                <CardHeader className="p-0">
+                  <Image
+                    src={project.thumbnail}
+                    alt="project image"
+                    width={0}
+                    height={0}
+                    layout="responsive"
+                    className="rounded-t"
+                  />
+                </CardHeader>
+                <CardContent className="p-2 flex flex-col gap-2">
+                  <h4 className="font-semibold text-sm">{project.name}</h4>
+                  <p className="text-xs text-manatee line-clamp-2 hover:line-clamp-none">
+                    {project.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {project.stacks?.map((stack: IStack, index: number) =>
+                      project.stacks!.length > 2 ? (
+                        <>
+                          {index < 3 ? (
+                            <Badge
+                              variant="outline"
+                              key={stack.Label}
+                              className="border-raisin-black flex justify-center items-center gap-1 w-fit"
+                            >
+                              <>
+                                <stack.Icon />
+                                {stack.Label}
+                              </>
+                            </Badge>
+                          ) : (
+                            index === project.stacks!.length - 1 && (
+                              <TooltipProvider delayDuration={100}>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <Badge
+                                      variant="outline"
+                                      key={index}
+                                      className="border-raisin-black flex justify-center items-center gap-1 w-fit"
+                                    >
+                                      +{project.stacks!.length - 3}
+                                    </Badge>
+                                  </TooltipTrigger>
+                                  <TooltipContent className="bg-erie-black border border-raisin-black">
+                                    {project.stacks!.map(
+                                      (
+                                        tooltipStack: IStack,
+                                        tooltipIndex: number
+                                      ) =>
+                                        tooltipIndex >= 3 && (
+                                          <p
+                                            key={tooltipIndex}
+                                            className="text-xs mb-1 flex justify-center items-center gap-1"
+                                          >
+                                            <>
+                                              <tooltipStack.Icon />
+                                              {tooltipStack.Label}
+                                            </>
+                                          </p>
+                                        )
+                                    )}
+                                  </TooltipContent>
+                                </Tooltip>
+                              </TooltipProvider>
+                            )
+                          )}
+                        </>
+                      ) : (
+                        <Badge
+                          variant="outline"
+                          key={stack.Label}
+                          className="border-raisin-black flex justify-center items-center gap-1 w-fit"
+                        >
+                          <>
+                            <stack.Icon />
+                            {stack.Label}
+                          </>
+                        </Badge>
+                      )
+                    )}
+                  </div>
+                </CardContent>
+                <CardFooter className="flex justify-end items-center gap-2">
+                  <Link href={project.repo}>
+                    <Button className="text-xs border border-imperial-red hover:bg-imperial-red/10 flex justify-center items-center gap-1 w-fit">
+                      <>
+                        <FaGithub />
+                        Source
+                      </>
+                    </Button>
+                  </Link>
+                  {project.disabled ? (
+                    <Button
+                      className="text-xs bg-imperial-red/80 cursor-not-allowed"
+                      disabled
+                    >
+                      Visit
+                    </Button>
+                  ) : (
+                    <Link href={project.link}>
+                      <Button className="text-xs bg-imperial-red hover:bg-imperial-red/80 hover:transition">
+                        Visit
+                      </Button>
+                    </Link>
+                  )}
+                </CardFooter>
+              </Card>
+            ))}
+          </section>
         </section>
 
         <section className="flex flex-col gap-3">
@@ -215,7 +481,9 @@ export default function Home() {
           >
             Get in touch
           </h3>
-          <p>Feel free to email anytime if you want to connect with me.</p>
+          <p className="text-sm">
+            Feel free to email if you want to connected with me. 📧
+          </p>
           <form className="flex flex-col gap-y-4">
             <div>
               <label
@@ -228,7 +496,7 @@ export default function Home() {
                 type="text"
                 id="name"
                 placeholder="Your name"
-                className="bg-erie-black border border-white/20"
+                className="bg-erie-black border border-raisin-black"
               />
             </div>
 
@@ -244,7 +512,7 @@ export default function Home() {
                 name="email"
                 type="email"
                 placeholder="Your email"
-                className="bg-erie-black border border-white/20"
+                className="bg-erie-black border border-raisin-black"
               />
             </div>
 
@@ -259,7 +527,7 @@ export default function Home() {
                 id="message"
                 name="message"
                 placeholder="Leave your messages"
-                className="bg-erie-black border border-white/20"
+                className="bg-erie-black border border-raisin-black"
               />
             </div>
 
@@ -270,7 +538,9 @@ export default function Home() {
               Submit
             </Button>
           </form>
-          <p>You also can reach me through these platforms.</p>
+          <p className="text-sm">
+            You also can reach me through these platforms. 📌
+          </p>
           <div className="flex justify-start items-center gap-4">
             <Link
               href="https://www.linkedin.com/in/arvinpaundraardana"

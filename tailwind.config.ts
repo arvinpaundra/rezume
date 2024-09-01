@@ -10,7 +10,9 @@ const config = {
       'vivid-red': '#F94747',
       'erie-black': '#18181B',
       'raisin-black': '#27272A',
+      onyx: '#27272A',
       black: '#111111',
+      manatee: '#A1A1AA',
       cultured: '#FAFAFA',
       white: '#FFFFFF',
     },
@@ -18,6 +20,7 @@ const config = {
       center: true,
       padding: '2rem',
       screens: {
+        xs: '320px',
         '2xl': '1400px',
       },
     },

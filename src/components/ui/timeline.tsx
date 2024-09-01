@@ -1,16 +1,16 @@
 import React from 'react';
 
 export interface ITimelineContent {
-  date: string;
+  header: string;
   children: React.ReactNode;
 }
 
-const TimelineContent: React.FC<ITimelineContent> = ({ date, children }) => {
+const TimelineContent: React.FC<ITimelineContent> = ({ header, children }) => {
   return (
     <div className="grid gap-1 text-sm relative px-4">
       <div className="aspect-square w-3 bg-imperial-red rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-2.5" />
-      <div className="text-lg font-bold">{date}</div>
-      <div className="text-gray-500 dark:text-gray-400">{children}</div>
+      <div className="text-lg font-bold">{header}</div>
+      <div>{children}</div>
     </div>
   );
 };
