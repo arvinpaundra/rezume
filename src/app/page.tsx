@@ -138,6 +138,10 @@ const projects: IProject[] = [
         Icon: FaDigitalOcean,
         Label: 'DigitalOcean',
       },
+      {
+        Icon: FaDocker,
+        Label: 'Docker',
+      },
     ],
   },
   {
@@ -220,7 +224,7 @@ export default function Home() {
     <main>
       <NavBar />
 
-      <section className="py-10 xl:px-28 md:px-16 sm:px-8 px-4 flex flex-col gap-8">
+      <section className="py-10 xl:px-28 md:px-16 sm:px-8 flex flex-col gap-8">
         <section className="flex justify-center items-center">
           <Alert className="bg-imperial-red/20 border border-imperial-red/80 text-white">
             <AlertDescription className="text-center">
@@ -259,7 +263,7 @@ export default function Home() {
             Stuff that i`ve used
           </h3>
           <ul>
-            <li className="grid grid-rows-3 grid-flow-col gap-2">
+            <li className="grid md:grid-rows-3 grid-flow-col grid-rows-5 gap-2">
               {stacks.map((stack: IStack) => (
                 <ul key={stack.Label}>
                   <li
@@ -267,7 +271,9 @@ export default function Home() {
                     className="flex justify-start items-center gap-2"
                   >
                     <stack.Icon />
-                    <p>{stack.Label}</p>
+                    <p className="md:text-base text-sm text-white/90">
+                      {stack.Label}
+                    </p>
                   </li>
                 </ul>
               ))}
@@ -356,7 +362,7 @@ export default function Home() {
             Hey, don`t forget to check out my other projects. 👻
           </p>
 
-          <section className="grid grid-cols-2 gap-2">
+          <section className="grid md:grid-cols-2 grid-cols-1 gap-2">
             {projects.map((project: IProject) => (
               <Card
                 className="bg-erie-black border border-raisin-black"
@@ -395,7 +401,7 @@ export default function Home() {
                             </Badge>
                           ) : (
                             index === project.stacks!.length - 1 && (
-                              <TooltipProvider delayDuration={100}>
+                              <TooltipProvider delayDuration={0}>
                                 <Tooltip>
                                   <TooltipTrigger asChild>
                                     <Badge
@@ -415,7 +421,7 @@ export default function Home() {
                                         tooltipIndex >= 3 && (
                                           <p
                                             key={tooltipIndex}
-                                            className="text-xs mb-1 flex justify-center items-center gap-1"
+                                            className="text-xs mb-1 flex justify-start items-center gap-1"
                                           >
                                             <>
                                               <tooltipStack.Icon />

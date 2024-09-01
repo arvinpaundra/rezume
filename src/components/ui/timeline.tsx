@@ -17,7 +17,7 @@ const TimelineContent: React.FC<ITimelineContent> = ({ header, children }) => {
 
 const Timeline: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <div className="px-6">
+    <div className="md:px-6 px-2">
       <div className="after:absolute after:inset-y-0 after:w-px after:bg-white/20 relative pl-6 after:left-0 grid gap-4">
         {children}
       </div>
